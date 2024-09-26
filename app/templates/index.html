@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>ItRadar</title>
+{% endblock %}
+
+{% block body %}
+    <div class="search-container">
+        <h2>Welcome to <span class="app-name">ItRadar</span>!</h2>
+        <div class="top-info">
+            <p>Total articles: <strong>{{article_number}}</strong></p>
+            <button class="about-page-button"><a href="/about">About Page</a></button>
+        </div>
+        <div class="search-bar">
+            <form action="" method="POST">
+                <input type="text" name="query" placeholder="Enter your search..." required>
+                <button type="submit" class="search-button">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
+        </div>
+        {% if top_results %}
+            <div class="results">
+                {% for result in top_results %}
+                    <a href="{{result['url']}}" target="_blank" class="result-link">{{result['title']}} ~ ({{ result['url'].split('/')[:3] | join('/') }}) </a>
+                    <br>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+    </div>
+{% endblock %}
